@@ -1,24 +1,28 @@
 type Query {
-    allBooks: [Book]
-    findOne(id: ID): Book
+    getBookById(id: Int): Book
+    getAllBooks: [Book]
+}
+type Mutation {
+    createBook(createBookInputDto: createBookInputDto): Book
 }
 
 type Book {
-    id: ID!
+    id: Int
     title: String
     pages: Int
-    rating: Rating
-    author: Author
-} 
-
-
-type Rating {
-    rating: String
-    star: String
+    authors: [Author]
 }
+input createBookInputDto {
+    title: String
+    pages: Int
+    authors: [createAuthorInputDto]
+}
+
 type Author {
-    id: ID!
-    firstName: String
-    lastName: String
-    books: [Book]
+    id: Int
+    fullname: String
+    book: Book
+}
+input createAuthorInputDto {
+    fullname: String
 }
